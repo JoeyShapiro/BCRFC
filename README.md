@@ -25,3 +25,6 @@ This is a roguelite style game. The player will have to scavenge for loot collec
 - pve
 
 *roguelite topdown 2D pve EFT*
+
+### Official Name Ideas
+B* C* Rogue F* C*
