@@ -23,4 +23,5 @@ This is a roguelite style game. The player will have to scavenge for loot collec
 - harder as you travel
 - AI
 - pve
+
 *roguelite topdown 2D pve EFT*
