@@ -28,3 +28,5 @@ This is a roguelite style game. The player will have to scavenge for loot collec
 
 ### Official Name Ideas
 B* C* Rogue F* C*
+Build Corp.: Rogue Foraging Client
+Become Corp.: Rogue *Foraging* Client
