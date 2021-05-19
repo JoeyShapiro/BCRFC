@@ -27,6 +27,6 @@ This is a roguelite style game. The player will have to scavenge for loot collec
 *roguelite topdown 2D pve EFT*
 
 ### Official Name Ideas
-B* C* Rogue F* C*
-Build Corp.: Rogue Foraging Client
-Become Corp.: Rogue *Foraging* Client
+B* C* Rogue F* C* <br/>
+Build Corp.: Rogue Foraging Client <br/>
+Become Corp.: Rogue *Foraging* Client <br/>
