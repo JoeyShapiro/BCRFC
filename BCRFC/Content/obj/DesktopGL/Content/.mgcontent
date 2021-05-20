@@ -4,8 +4,8 @@
   <Platform>DesktopGL</Platform>
   <Config />
   <SourceFiles>
-    <File>C:/Users/joeya/source/repos/BCRFC/BCRFC/Content/ball.png</File>
-    <File>C:/Users/joeya/source/repos/BCRFC/BCRFC/Content/Bullet.png</File>
+    <File>C:/Users/joeya/Source/Repos/BCRFC/BCRFC/Content/ball.png</File>
+    <File>C:/Users/joeya/Source/Repos/BCRFC/BCRFC/Content/Bullet.png</File>
   </SourceFiles>
   <DestFiles>
     <File xsi:nil="true" />
