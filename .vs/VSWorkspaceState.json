@@ -1,8 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\BCRFC"
+    "\\BCRFC",
+    "\\BCRFC\\Content"
   ],
-  "SelectedNode": "\\BCRFC\\Program.cs",
+  "SelectedNode": "\\README.md",
   "PreviewInSolutionExplorer": false
 }

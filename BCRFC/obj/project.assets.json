@@ -174,24 +174,31 @@
     ]
   },
   "packageFolders": {
-    "/home/oniichan/.nuget/packages/": {}
+    "C:\\Users\\joeya\\.nuget\\packages\\": {},
+    "C:\\Microsoft\\Xamarin\\NuGet\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/oniichan/Documents/source/c#/BCRFC/BCRFC/BCRFC.csproj",
+      "projectUniqueName": "C:\\Users\\joeya\\source\\repos\\BCRFC\\BCRFC\\BCRFC.csproj",
       "projectName": "BCRFC",
-      "projectPath": "/home/oniichan/Documents/source/c#/BCRFC/BCRFC/BCRFC.csproj",
-      "packagesPath": "/home/oniichan/.nuget/packages/",
-      "outputPath": "/home/oniichan/Documents/source/c#/BCRFC/BCRFC/obj/",
+      "projectPath": "C:\\Users\\joeya\\source\\repos\\BCRFC\\BCRFC\\BCRFC.csproj",
+      "packagesPath": "C:\\Users\\joeya\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\joeya\\source\\repos\\BCRFC\\BCRFC\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Microsoft\\Xamarin\\NuGet\\"
+      ],
       "configFilePaths": [
-        "/home/oniichan/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\joeya\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.1"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -232,7 +239,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/3.1.409/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.401\\RuntimeIdentifierGraph.json"
       }
     }
   }

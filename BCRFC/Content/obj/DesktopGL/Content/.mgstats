@@ -1,1 +1,3 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
+"C:/Users/joeya/source/repos/BCRFC/BCRFC/Content/ball.png","C:/Users/joeya/source/repos/BCRFC/BCRFC/Content/bin/DesktopGL/Content/ball.xnb","TextureProcessor","Texture2DContent",8368,16469,0.1162228
+"C:/Users/joeya/source/repos/BCRFC/BCRFC/Content/Bullet.png","C:/Users/joeya/source/repos/BCRFC/BCRFC/Content/bin/DesktopGL/Content/Bullet.xnb","TextureProcessor","Texture2DContent",8368,16469,0.1158449
