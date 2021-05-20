@@ -42,7 +42,10 @@ C:\Users\joeya\source\repos\BCRFC\BCRFC\bin\Debug\netcoreapp3.1\runtimes\win-x86
 C:\Users\joeya\source\repos\BCRFC\BCRFC\obj\Debug\netcoreapp3.1\BCRFC.csprojAssemblyReference.cache
 C:\Users\joeya\source\repos\BCRFC\BCRFC\obj\Debug\netcoreapp3.1\BCRFC.AssemblyInfoInputs.cache
 C:\Users\joeya\source\repos\BCRFC\BCRFC\obj\Debug\netcoreapp3.1\BCRFC.AssemblyInfo.cs
-C:\Users\joeya\source\repos\BCRFC\BCRFC\obj\Debug\netcoreapp3.1\BCRFC.csproj.CoreCompileInputs.cache
 C:\Users\joeya\source\repos\BCRFC\BCRFC\obj\Debug\netcoreapp3.1\BCRFC.csproj.CopyComplete
 C:\Users\joeya\source\repos\BCRFC\BCRFC\obj\Debug\netcoreapp3.1\BCRFC.genruntimeconfig.cache
 C:\Users\joeya\source\repos\BCRFC\BCRFC\bin\Debug\netcoreapp3.1\Content\Bullet.xnb
+C:\Users\joeya\source\repos\BCRFC\BCRFC\bin\Debug\netcoreapp3.1\Content\Player.xnb
+C:\Users\joeya\source\repos\BCRFC\BCRFC\bin\Debug\netcoreapp3.1\Content\Weapon.xnb
+C:\Users\joeya\source\repos\BCRFC\BCRFC\bin\Debug\netcoreapp3.1\MonoGame.UI.Forms.dll
+C:\Users\joeya\source\repos\BCRFC\BCRFC\obj\Debug\netcoreapp3.1\BCRFC.csproj.CoreCompileInputs.cache

@@ -1,0 +1,50 @@
+Client
+	player
+	ship
+		printer
+		cloning
+		terminal
+		shop
+World
+	grass
+	pickups
+		plants
+	NPC
+		slime
+		wolf
+		rat
+		deer
+		cow
+		pig
+		chicken
+	rock
+	tree
+natives
+	enemies
+		ranged
+		melee
+		elite
+	structures
+		wood
+		stone
+		chest
+items
+	ranged
+		bow
+		gun
+	melee
+		whip
+		sword
+		shortsword
+		hatchet
+	food
+	storage
+		knapsack
+		satchel
+		bigbag
+		pockets
+	clothes
+		cloth
+		iron
+		bronze
+		vanity

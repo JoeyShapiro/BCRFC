@@ -49,6 +49,10 @@
             "MonoGame.Framework.DesktopGL": {
               "target": "Package",
               "version": "[3.8.0.1641, )"
+            },
+            "MonoGame.UI.Forms": {
+              "target": "Package",
+              "version": "[1.0.1, )"
             }
           },
           "imports": [

@@ -1,3 +1,5 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
-"C:/Users/joeya/Source/Repos/BCRFC/BCRFC/Content/ball.png","C:/Users/joeya/Source/Repos/BCRFC/BCRFC/Content/bin/DesktopGL/Content/ball.xnb","TextureProcessor","Texture2DContent",8368,16469,0.117649
-"C:/Users/joeya/Source/Repos/BCRFC/BCRFC/Content/Bullet.png","C:/Users/joeya/Source/Repos/BCRFC/BCRFC/Content/bin/DesktopGL/Content/Bullet.xnb","TextureProcessor","Texture2DContent",8368,16469,0.0015742
+"C:/Users/joeya/Source/Repos/BCRFC/BCRFC/Content/ball.png","C:/Users/joeya/Source/Repos/BCRFC/BCRFC/Content/bin/DesktopGL/Content/ball.xnb","TextureProcessor","Texture2DContent",8368,16469,0.1220761
+"C:/Users/joeya/Source/Repos/BCRFC/BCRFC/Content/Bullet.png","C:/Users/joeya/Source/Repos/BCRFC/BCRFC/Content/bin/DesktopGL/Content/Bullet.xnb","TextureProcessor","Texture2DContent",8368,16469,0.0015878
+"C:/Users/joeya/Source/Repos/BCRFC/BCRFC/Content/Player.png","C:/Users/joeya/Source/Repos/BCRFC/BCRFC/Content/bin/DesktopGL/Content/Player.xnb","TextureProcessor","Texture2DContent",8956,16469,0.0015554
+"C:/Users/joeya/Source/Repos/BCRFC/BCRFC/Content/Weapon.png","C:/Users/joeya/Source/Repos/BCRFC/BCRFC/Content/bin/DesktopGL/Content/Weapon.xnb","TextureProcessor","Texture2DContent",7399,16469,0.0013359

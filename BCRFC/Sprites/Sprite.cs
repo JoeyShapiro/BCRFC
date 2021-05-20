@@ -45,13 +45,13 @@ namespace BCRFC.Sprites
             }
         }
 
-        //public Rectangle CollisionArea
-        //{
-        //    get
-        //    {
-        //        return new Rectangle(Rectangle.X, Rectangle.Y, MathHelper.Max(Rectangle.Width, Rectangle.Height), MathHelper.Max(Rectangle.Width, Rectangle.Height));
-        //    }
-        //}
+        public Rectangle CollisionArea
+        {
+            get
+            {
+                return new Rectangle(Rectangle.X, Rectangle.Y, MathHelper.Max(Rectangle.Width, Rectangle.Height), MathHelper.Max(Rectangle.Width, Rectangle.Height));
+            }
+        }
 
         public float Rotation
         {
@@ -61,6 +61,8 @@ namespace BCRFC.Sprites
                 _rotation = value;
             }
         }
+
+        public readonly Color[] TextureData;
 
         public Matrix Transform
         {
@@ -83,47 +85,65 @@ namespace BCRFC.Sprites
                 spriteBatch.Draw(_texture, Position, null, Color.White, _rotation, Origin, 1, SpriteEffects.None, 0);
         }
 
-        //public bool Intersects(Sprite sprite)
-        //{
-        //    if (this.TextureData == null)
-        //        return false;
-        //    if (sprite.TextureData == null)
-        //        return false;
+        public bool Intersects(Sprite sprite)
+        {
+            if (this.TextureData == null)
+                return false;
 
-        //    var transformAtoB = this.Transform * Matrix.Invert(sprite.Transform);
+            if (sprite.TextureData == null)
+                return false;
 
-        //    var stepX = Vector2.TransformNormal(Vector2.UnitX, transformAtoB);
-        //    var stepY = Vector2.TransformNormal(Vector2.UnitY, transformAtoB);
+            // Calculate a matrix which transforms from A's local space into
+            // world space and then into B's local space
+            var transformAToB = this.Transform * Matrix.Invert(sprite.Transform);
 
-        //    var yPosInB = Vector2.Transform(Vector2.Zero, transformAtoB);
+            // When a point moves in A's local space, it moves in B's local space with a
+            // fixed direction and distance proportional to the movement in A.
+            // This algorithm steps through A one pixel at a time along A's X and Y axes
+            // Calculate the analogous steps in B:
+            var stepX = Vector2.TransformNormal(Vector2.UnitX, transformAToB);
+            var stepY = Vector2.TransformNormal(Vector2.UnitY, transformAToB);
 
-        //    for (int yA = 0; yA < this.Rectangle.Height; yA++)
-        //    {
-        //        var posInB = yPosInB;
+            // Calculate the top left corner of A in B's local space
+            // This variable will be reused to keep track of the start of each row
+            var yPosInB = Vector2.Transform(Vector2.Zero, transformAToB);
 
-        //        for (int xA = 0; xA < this.Rectangle.Width; xA++)
-        //        {
-        //            var xB = (int)Math.Round(posInB.X);
-        //            var yB = (int)Math.Round(posInB.Y);
-        //            if (0 <= xB && xB < sprite.Rectangle.Width &&
-        //                0 <= yB && yB < sprite.Rectangle.Height)
-        //            {
-        //                var colorA = this.TextureData[xA + yA * this.Rectangle.Width];
-        //                var colorB = sprite.TextureData[xB + yB * sprite.Rectangle.Width];
+            for (int yA = 0; yA < this.Rectangle.Height; yA++)
+            {
+                // Start at the beginning of the row
+                var posInB = yPosInB;
 
-        //                if(colorA.A != 0 && colorB.A != 0)
-        //                {
-        //                    return true;
-        //                }
-        //            }
+                for (int xA = 0; xA < this.Rectangle.Width; xA++)
+                {
+                    // Round to the nearest pixel
+                    var xB = (int)Math.Round(posInB.X);
+                    var yB = (int)Math.Round(posInB.Y);
 
-        //            posInB += stepX;
-        //        }
-        //        yPosInB += stepY;
-        //    }
+                    if (0 <= xB && xB < sprite.Rectangle.Width &&
+                        0 <= yB && yB < sprite.Rectangle.Height)
+                    {
+                        // Get the colors of the overlapping pixels
+                        var colourA = this.TextureData[xA + yA * this.Rectangle.Width];
+                        var colourB = sprite.TextureData[xB + yB * sprite.Rectangle.Width];
 
-        //    return false;
-        //}
+                        // If both pixel are not completely transparent
+                        if (colourA.A != 0 && colourB.A != 0)
+                        {
+                            return true;
+                        }
+                    }
+
+                    // Move to the next pixel in the row
+                    posInB += stepX;
+                }
+
+                // Move to the next row
+                yPosInB += stepY;
+            }
+
+            // No intersection found
+            return false;
+        }
 
         public object Clone()
         {
