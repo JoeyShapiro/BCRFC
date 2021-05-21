@@ -38,6 +38,11 @@ namespace BCRFC.Sprites
                     this.Velocity.Y = 0;
             }
 
+            if (IsOutOfBoundsX())
+                this.Velocity.X = 0;
+            if (IsOutOfBoundsY())
+                this.Velocity.Y = 0;
+
             Position += Velocity;
 
             Velocity = Vector2.Zero;

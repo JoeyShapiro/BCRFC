@@ -119,6 +119,15 @@ namespace BCRFC.Sprites
               this.Rectangle.Left < sprite.Rectangle.Right;
         }
 
+        protected bool IsOutOfBoundsX()
+        {
+            return this.Rectangle.Right + this.Velocity.X > 640 || this.Rectangle.Left + this.Velocity.X < 0;
+        }
+        protected bool IsOutOfBoundsY()
+        {
+            return this.Rectangle.Bottom + this.Velocity.Y > 520 || this.Rectangle.Top + this.Velocity.Y < 0;
+        }
+
         #endregion
 
         //public bool Intersects(Sprite sprite)
