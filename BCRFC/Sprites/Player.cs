@@ -18,34 +18,51 @@ namespace BCRFC.Sprites
         public Player(Texture2D texture) : base(texture)
         {
             Position = new Vector2(30, 40);
-            Velocity = 5f;
         }
 
         public override void Update(GameTime gameTime, List<Sprite> sprites)
         {
             Move(sprites);
+
+            foreach (var sprite in sprites)
+            {
+                if (sprite == this)
+                    continue;
+
+                if ((this.Velocity.X > 0 && this.IsTouchingLeft(sprite)) ||
+                    (this.Velocity.X < 0 & this.IsTouchingRight(sprite)))
+                    this.Velocity.X = 0;
+
+                if ((this.Velocity.Y > 0 && this.IsTouchingTop(sprite)) ||
+                    (this.Velocity.Y < 0 & this.IsTouchingBottom(sprite)))
+                    this.Velocity.Y = 0;
+            }
+
+            Position += Velocity;
+
+            Velocity = Vector2.Zero;
         }
 
         public void Move(List<Sprite> sprites)
         {
             if (Keyboard.GetState().IsKeyDown(Keys.W))
             {
-                Position.Y -= 3;
+                Velocity.Y = -Speed;
                 Rotation = MathHelper.ToRadians(90);
             }
-            if (Keyboard.GetState().IsKeyDown(Keys.S))
+            else if (Keyboard.GetState().IsKeyDown(Keys.S))
             {
-                Position.Y += 3;
+                Velocity.Y = Speed;
                 Rotation = MathHelper.ToRadians(270);
             }
             if (Keyboard.GetState().IsKeyDown(Keys.A))
             {
-                Position.X -= 3;
+                Velocity.X = -Speed;
                 Rotation = MathHelper.ToRadians(180);
             }
-            if (Keyboard.GetState().IsKeyDown(Keys.D))
+            else if (Keyboard.GetState().IsKeyDown(Keys.D))
             {
-                Position.X += 3;
+                Velocity.X = Speed;
                 Rotation = MathHelper.ToRadians(0);
             }
             if (Keyboard.GetState().IsKeyDown(Keys.Space))

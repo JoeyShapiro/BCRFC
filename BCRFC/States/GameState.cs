@@ -37,11 +37,12 @@ namespace BCRFC.States
                 new Player(playerTexture)
                 {
                     Bullet = new Bullet(_content.Load<Texture2D>("Bullet")),
-                    Weapon = new Weapon(_content.Load<Texture2D>("Weapon"))
+                    Weapon = new Weapon(_content.Load<Texture2D>("Weapon")),
+                    Speed = 5
                 },
                 new Slime(playerTexture)
                 {
-
+                    Speed = 3
                 }
             };
         }
@@ -63,23 +64,6 @@ namespace BCRFC.States
         }
         public override void PostUpdate(GameTime gameTime)
         {
-            var collidableSprites = sprites.Where(c => c is ICollidable);
-
-            foreach (var spriteA in collidableSprites)
-            {
-                foreach (var spriteB in collidableSprites)
-                {
-                    if (spriteA == spriteB)
-                        continue;
-
-                    if (!spriteA.CollisionArea.Intersects(spriteB.CollisionArea))
-                        continue;
-
-                    if (spriteA.Intersects(spriteB))
-                        ((ICollidable)spriteA).OnCollide(spriteB);
-                }
-            }
-
             for (int i = 0; i < sprites.Count; i++)
             {
                 if (sprites[i].IsRemoved)
