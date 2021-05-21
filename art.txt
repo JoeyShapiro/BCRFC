@@ -5,6 +5,8 @@ Client
 		cloning
 		terminal
 		shop
+		exterior walls
+		interior walls
 World
 	grass
 	pickups
@@ -48,3 +50,7 @@ items
 		iron
 		bronze
 		vanity
+UI nonsense
+	buttons
+	inventory
+	shops

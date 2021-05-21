@@ -6,6 +6,7 @@ using BCRFC.Sprites;
 using BCRFC.Models;
 using System.Linq;
 using BCRFC.States;
+using BCRFC.Controls;
 
 namespace BCRFC
 {
@@ -19,8 +20,9 @@ namespace BCRFC
 
         protected float timer;
 
-        private State _currentState;
+        public State _currentState;
         private State _nextState;
+        private UIControls ui;
      
         public Game1()
         {
@@ -40,6 +42,8 @@ namespace BCRFC
             ScreenHeight = graphics.PreferredBackBufferHeight;
             graphics.IsFullScreen = false;
             graphics.ApplyChanges();
+            ui = new UIControls(this);
+            this.Components.Add(ui);
 
             base.Initialize();
         }
@@ -48,8 +52,9 @@ namespace BCRFC
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            _currentState = new GameState(this, Content);
+            _currentState = new MenuState(this, Content);
             _currentState.LoadContent();
+            ui.ChangeState(_currentState);
             _nextState = null;
         }
 
@@ -60,6 +65,7 @@ namespace BCRFC
                 {
                     _currentState = _nextState;
                     _currentState.LoadContent();
+                    ui.ChangeState(_currentState);
 
                     _nextState = null;
                 }

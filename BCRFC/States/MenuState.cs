@@ -49,9 +49,9 @@ namespace BCRFC.States
             };
         }
 
-        private void Button_Start_Clicked(object sender, EventArgs args)
+        private void Start()
         {
-           
+            _game.ChangeState(new GameState(_game, _content));
         }
 
         public override void PostUpdate(GameTime gameTime)

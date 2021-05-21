@@ -49,3 +49,4 @@ C:\Users\joeya\source\repos\BCRFC\BCRFC\bin\Debug\netcoreapp3.1\Content\Player.x
 C:\Users\joeya\source\repos\BCRFC\BCRFC\bin\Debug\netcoreapp3.1\Content\Weapon.xnb
 C:\Users\joeya\source\repos\BCRFC\BCRFC\bin\Debug\netcoreapp3.1\MonoGame.UI.Forms.dll
 C:\Users\joeya\source\repos\BCRFC\BCRFC\obj\Debug\netcoreapp3.1\BCRFC.csproj.CoreCompileInputs.cache
+C:\Users\joeya\source\repos\BCRFC\BCRFC\bin\Debug\netcoreapp3.1\Content\defaultFont.xnb

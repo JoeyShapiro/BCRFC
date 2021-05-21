@@ -9,7 +9,7 @@ using System.ComponentModel;
 
 namespace BCRFC.Controls
 {
-    public class Button : Component
+    public class MyButton : Component
     {
         #region Fields
 
@@ -49,7 +49,7 @@ namespace BCRFC.Controls
         #endregion
 
         #region Methods
-        public Button(Texture2D texture, SpriteFont font)
+        public MyButton(Texture2D texture, SpriteFont font)
         {
             _texture = texture;
             _font = font;

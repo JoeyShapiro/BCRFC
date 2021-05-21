@@ -4,12 +4,14 @@
   <Platform>DesktopGL</Platform>
   <Config />
   <SourceFiles>
-    <File>C:/Users/joeya/Source/Repos/BCRFC/BCRFC/Content/ball.png</File>
-    <File>C:/Users/joeya/Source/Repos/BCRFC/BCRFC/Content/Bullet.png</File>
-    <File>C:/Users/joeya/Source/Repos/BCRFC/BCRFC/Content/Player.png</File>
-    <File>C:/Users/joeya/Source/Repos/BCRFC/BCRFC/Content/Weapon.png</File>
+    <File>C:/Users/joeya/source/repos/BCRFC/BCRFC/Content/ball.png</File>
+    <File>C:/Users/joeya/source/repos/BCRFC/BCRFC/Content/Bullet.png</File>
+    <File>C:/Users/joeya/source/repos/BCRFC/BCRFC/Content/defaultFont.spritefont</File>
+    <File>C:/Users/joeya/source/repos/BCRFC/BCRFC/Content/Player.png</File>
+    <File>C:/Users/joeya/source/repos/BCRFC/BCRFC/Content/Weapon.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
