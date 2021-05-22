@@ -23,6 +23,7 @@ namespace BCRFC.Sprites
         private Pickup picked;
         public List<Pickup> Inventory = new List<Pickup>(); // temporary make class and either use in player or have Pickup deal with inserting Item not Pickup
         private bool CanAct = true;// to clean and give one command at time
+        private List<Inventory> Inventories; // make private for eaiser use but use methods and give items to player also check naming
 
         public Player(Texture2D texture) : base(texture)
         {
@@ -47,7 +48,7 @@ namespace BCRFC.Sprites
                     (this.Velocity.Y < 0 & this.IsTouchingBottom(sprite)))
                     this.Velocity.Y = 0;
 
-                if (sprite.GetType() == typeof(Pickup)) // check for range so maybe in pickup the player has enough to deal with
+                if (sprite.GetType() == typeof(Pickup) && InRange(sprite)) // check for range so maybe in pickup the player has enough to deal with
                     Pickups.Add((Pickup) sprite);
             }
 
@@ -161,6 +162,12 @@ namespace BCRFC.Sprites
             CanAttack = false;
 
             sprites.Add(weapon);
+        }
+
+        public bool InRange(Sprite sprite)
+        {
+            int Range = 72;
+            return sprite.Position.X < this.Position.X + Range && sprite.Position.X > this.Position.X - Range && sprite.Position.Y < this.Position.Y + Range && sprite.Position.Y > this.Position.Y - Range; // check for better with Pos
         }
     }
 }

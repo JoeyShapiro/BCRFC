@@ -15,7 +15,7 @@ namespace BCRFC.Sprites
         {
             Position = new Vector2(120, 40);
             Name = "Place Holder";
-            Desc = "Place Holder";
+            Desc = "Place Holder"; // have this create the item from here and be sneaky rather than leading to an item
         }
     }
 }
