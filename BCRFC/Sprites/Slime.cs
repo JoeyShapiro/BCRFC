@@ -18,6 +18,7 @@ namespace BCRFC.Sprites
         {
             Position = new Vector2(500, 40);
             enemies = new List<Sprite>();
+            Health = 4;
         }
 
         public override void Update(GameTime gameTime, List<Sprite> sprites)
@@ -46,6 +47,10 @@ namespace BCRFC.Sprites
                     (this.Velocity.Y < 0 & this.IsTouchingBottom(sprite)))
                     this.Velocity.Y = 0;
             }
+
+            // move to Sprite
+            if (Health <= 0)
+                IsRemoved = true;
 
             Position += Velocity;
 

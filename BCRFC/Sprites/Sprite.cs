@@ -24,6 +24,7 @@ namespace BCRFC.Sprites
         protected float _rotation;
         public float LinearVelocity = 4f;
         public float Speed;
+        public int Health;
 
         protected Texture2D _texture;
 
@@ -77,7 +78,7 @@ namespace BCRFC.Sprites
 
         public virtual void Update (GameTime GameTime, List<Sprite> sprite)
         {
-
+            
         }
 
         public virtual void Draw(SpriteBatch spriteBatch)

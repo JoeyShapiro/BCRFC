@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using BCRFC.Sprites;
 using BCRFC.Models;
+using System.Diagnostics;
 
 namespace BCRFC.Sprites
 {
@@ -14,6 +15,9 @@ namespace BCRFC.Sprites
         public bool HasBied = false;
         public Bullet Bullet;
         public Weapon Weapon;
+        const float _delay = 2;
+        float _remainingDelay = _delay;
+        public bool CanAttack = true;
 
         public Player(Texture2D texture) : base(texture)
         {
@@ -42,6 +46,19 @@ namespace BCRFC.Sprites
                 this.Velocity.X = 0;
             if (IsOutOfBoundsY())
                 this.Velocity.Y = 0;
+
+            float timer = (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+            _remainingDelay -= timer;
+
+            if (_remainingDelay <= 0)
+            {
+                LifeSpan--;
+                if (LifeSpan <= 0)
+                    CanAttack = true;
+
+                _remainingDelay = _delay;
+            }
 
             Position += Velocity;
 
@@ -72,7 +89,8 @@ namespace BCRFC.Sprites
             }
             if (Keyboard.GetState().IsKeyDown(Keys.Space))
             {
-                Attack(sprites);
+                if (CanAttack)
+                    Attack(sprites);
             }
         }
 
@@ -90,7 +108,9 @@ namespace BCRFC.Sprites
 
         public void Attack(List<Sprite> sprites)
         {
+            Debug.WriteLine("Attack");
             var weapon = Weapon.Clone() as Weapon;
+            weapon.Attacked = new List<Sprite>();
             weapon.Direction = this.Direction;
             // find cleaner way
             if (this.Rotation == MathHelper.ToRadians(90))
@@ -113,6 +133,7 @@ namespace BCRFC.Sprites
             weapon.Rotation = this.Rotation;
             weapon.LifeSpan = 2f;
             weapon.Parent = this;
+            CanAttack = false;
 
             sprites.Add(weapon);
         }
