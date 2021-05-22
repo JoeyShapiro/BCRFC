@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using BCRFC.Sprites;
 using BCRFC.Models;
+using System.Diagnostics;
 
 namespace BCRFC.Sprites
 {
@@ -13,12 +14,15 @@ namespace BCRFC.Sprites
     {
         private List<Sprite> enemies;
         private bool isFresh = true;
+        const float _delay = 2;
+        float _remainingDelay = _delay;
 
         public Slime(Texture2D texture) : base(texture)
         {
             Position = new Vector2(500, 40);
             enemies = new List<Sprite>();
             Health = 4;
+            MaxHealth = Health; // maybe set first idk im tired
         }
 
         public override void Update(GameTime gameTime, List<Sprite> sprites)
@@ -46,11 +50,28 @@ namespace BCRFC.Sprites
                 if ((this.Velocity.Y > 0 && this.IsTouchingTop(sprite)) ||
                     (this.Velocity.Y < 0 & this.IsTouchingBottom(sprite)))
                     this.Velocity.Y = 0;
+
+                Repulse(sprite);
             }
 
             // move to Sprite
             if (Health <= 0)
+            {
+                if (!IsRemoved) // i hate checking everything i need function
+                    Spawn(sprites);
                 IsRemoved = true;
+            }
+
+            // give invuln to deal with not spawning at start
+            float timer = (float)gameTime.ElapsedGameTime.TotalSeconds;
+            _remainingDelay -= timer;
+
+            if (_remainingDelay <= 0)
+            {
+                IsInvulnerable = false; // find better place im tired of these checks
+
+                _remainingDelay = _delay;
+            }
 
             Position += Velocity;
 
@@ -75,6 +96,23 @@ namespace BCRFC.Sprites
                 else if (sprite.Position.Y < Position.Y)
                     Velocity.Y = -Speed;
             }
+        }
+
+        public void Spawn(List<Sprite> sprites)
+        {
+            if (MaxHealth < 4)
+                return;
+
+            var slime = this.Clone() as Slime;
+            slime.Position = this.Position;
+            slime.Health = MaxHealth / 2;
+            slime.MaxHealth = slime.Health;
+            slime.IsRemoved = false;
+            slime.isFresh = true;
+
+            Debug.WriteLine("new Slimes 2 " + slime.MaxHealth + " at " + slime.Position.X + ", " + slime.Position.Y); // they get attacked when spawned and are on each other
+            sprites.Add(slime);
+            sprites.Add(slime);
         }
     }
 }

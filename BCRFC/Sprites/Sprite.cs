@@ -25,6 +25,8 @@ namespace BCRFC.Sprites
         public float LinearVelocity = 4f;
         public float Speed;
         public int Health;
+        public int MaxHealth;
+        public bool IsInvulnerable = false;
 
         protected Texture2D _texture;
 
@@ -127,6 +129,21 @@ namespace BCRFC.Sprites
         protected bool IsOutOfBoundsY()
         {
             return this.Rectangle.Bottom + this.Velocity.Y > 520 || this.Rectangle.Top + this.Velocity.Y < 0;
+        }
+
+        // check if best also find more math way to solve
+        protected void Repulse(Sprite sprite)
+        {
+            if (this.Position == sprite.Position) // i think this solves if on top of each other
+                this.Position += new Vector2(new Random().Next(0, 1), new Random().Next(0, 1));
+            if (IsTouchingTop(sprite))
+                this.Position += new Vector2(0, -1);
+            if (IsTouchingBottom(sprite))
+                this.Position += new Vector2(0, 1);
+            if (IsTouchingLeft(sprite))
+                this.Position += new Vector2(-1, 0);
+            if (IsTouchingRight(sprite))
+                this.Position += new Vector2(1, 0);
         }
 
         #endregion

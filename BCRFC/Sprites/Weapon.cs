@@ -78,10 +78,11 @@ namespace BCRFC.Sprites
         public void Attack(Sprite sprite)
         {
             // spend time cleaning this up
-            if (Attacked.Contains(sprite))
+            if (Attacked.Contains(sprite) || sprite.IsInvulnerable)
                 return;
             Debug.WriteLine("Attacked");
             sprite.Health -= Damage;
+            sprite.IsInvulnerable = true;
             Attacked.Add(sprite);
         }
     }
