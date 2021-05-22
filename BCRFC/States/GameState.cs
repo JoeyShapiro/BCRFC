@@ -43,6 +43,10 @@ namespace BCRFC.States
                 new Slime(playerTexture)
                 {
                     Speed = 3
+                },
+                new Pickup(playerTexture)
+                {
+                    Name = "Not PH"
                 }
             };
         }
