@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework;
 using MonoGame.UI.Forms;
 using BCRFC.States;
 using BCRFC.Sprites;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace BCRFC.Controls
 {
@@ -15,6 +16,12 @@ namespace BCRFC.Controls
         private static int screenHeight;
 
         private Form playerForm;
+        private Player player;
+        private float sizeX;
+        private float sizeY;
+        private float playerFormX;
+        private float playerFormY;
+        private GameState gameState;
 
         public UIControls(Game1 game) : base(game)
         {
@@ -38,7 +45,8 @@ namespace BCRFC.Controls
         private void BtnStart_Clicked(object sender, EventArgs e)
         {
             Button btn = sender as Button;
-            _game.ChangeState(new GameState(_game, _game.Content));
+            gameState = new GameState(_game, _game.Content);
+            _game.ChangeState(gameState);
         }
 
         private void BtnCodex_Clicked(object sender, EventArgs e)
@@ -173,22 +181,77 @@ namespace BCRFC.Controls
             Controls.Add(btnBack);
         }
 
-        public void ShowPlayerForm(Player player)
+        public void ShowPlayerForm(Player p, float x, float y)
         {
+            player = p;
+
+            sizeX = 500;
+            sizeY = 500;
+            playerFormX = x;
+            playerFormY = y;
+
             playerForm = new Form()
             {
                 Title = "Pipboy",
                 IsMovable = true,
-                Location = new Vector2(100, 100),
-                Size = new Vector2(526, 526)
+                Location = new Vector2(x, y),
+                Size = new Vector2(sizeX, sizeY)
             };
+            ChangePlayerForm();
+            Controls.Add(playerForm);
+        }
+
+        private void ChangePlayerForm()
+        {
+            var btnInv = new Button()
+            {
+                Text = "Inventory",
+                Size = new Vector2(sizeX / 2, 32),
+                BackgroundColor = Color.Blue,
+                Location = new Vector2(0, 24)
+            };
+            var btnStats = new Button()
+            {
+                Text = "Stats",
+                Size = new Vector2(sizeX / 2, 32),
+                BackgroundColor = Color.Blue,
+                Location = new Vector2(sizeX / 2, 24)
+            };
+            btnInv.Clicked += BtnInv_Clicked;
+            btnStats.Clicked += BtnStats_Clicked;
+            playerForm.Controls.Add(btnInv);
+            playerForm.Controls.Add(btnStats);
+        }
+
+        private void BtnInv_Clicked(object sender, EventArgs e)
+        {
+            playerForm.Controls.RemoveAll(delegate (Control c) { return true; });
+            ChangePlayerForm();
             var lblTemp = new Label()
             {
                 Text = player.TempInventory.ToString(),
-                Location = new Vector2 (110, 110)
+                Location = new Vector2(110, 110)
             };
             playerForm.Controls.Add(lblTemp);
-            Controls.Add(playerForm);
+        }
+
+        private void BtnStats_Clicked(object sender, EventArgs e)
+        {
+            playerForm.Controls.RemoveAll(delegate (Control c) { return true; });
+            ChangePlayerForm();
+            string stats = string.Format("Health: {0}\nEnergy: \nPlatinum: \nGold: \nEffects:", player.Health);
+            var txtArea = new TextArea()
+            {
+                Location = new Vector2(256, 64),
+                Text = stats
+            };
+            var playerTexture = _game.Content.Load<Texture2D>("Player");
+            Sprite sprite = new Sprite(playerTexture)
+            {
+                Position = new Vector2(playerFormX, playerFormY + 72)
+            };
+            gameState.sprites.Add(sprite); // works but needs a list to be on top of display
+            playerForm.Controls.Add(txtArea);
         }
 
         public void HidePlayerForm()

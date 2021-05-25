@@ -17,7 +17,7 @@ namespace BCRFC.States
     public class GameState : State
     {
         private SpriteFont font;
-        private List<Sprite> sprites;
+        public List<Sprite> sprites;
         private Texture2D power;
         public static Random random;
         private Texture2D gameBackgroundTexture;

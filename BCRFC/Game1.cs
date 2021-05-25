@@ -95,7 +95,7 @@ namespace BCRFC
             }
             else
             {
-                ui.ShowPlayerForm(player);
+                ui.ShowPlayerForm(player, 64, 64);
                 IsShowingPlayer = true;
             }
         }
