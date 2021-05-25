@@ -4,7 +4,7 @@ using System.Text;
 
 namespace BCRFC.Models
 {
-    class Inventory // check if correct folder for this
+    public class Inventory // check if correct folder for this
     {
         private int Width;
         private int Height;

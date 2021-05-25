@@ -11,7 +11,7 @@ using System.Linq;
 
 namespace BCRFC.Sprites
 {
-    class Player : Sprite
+    public class Player : Sprite
     {
         public bool HasBied = false;
         public Bullet Bullet;
@@ -21,7 +21,7 @@ namespace BCRFC.Sprites
         public bool CanAttack = true;
         private List<Pickup> Pickups = new List<Pickup>(); // maybe pickups add to this list
         private Pickup picked;
-        public List<Pickup> Inventory = new List<Pickup>(); // temporary make class and either use in player or have Pickup deal with inserting Item not Pickup
+        public List<Pickup> TempInventory = new List<Pickup>(); // temporary make class and either use in player or have Pickup deal with inserting Item not Pickup see it does cause issue
         private bool CanAct = true;// to clean and give one command at time
         private List<Inventory> Inventories; // make private for eaiser use but use methods and give items to player also check naming
 
@@ -110,14 +110,15 @@ namespace BCRFC.Sprites
                 picked = Pickups.FirstOrDefault();
                 if (picked != null && CanAct)
                 {
-                    Inventory.Add(picked);
+                    TempInventory.Add(picked);
                     Pickups.Remove(picked); // maybe redundant because list is always cleared
                     picked.IsRemoved = true; // remove from map
                     Debug.WriteLine(picked.Name);
-                    Debug.WriteLine(Inventory.Count);
+                    Debug.WriteLine(TempInventory.Count);
                     CanAct = false;
                 }
             }
+            // move to other place for input
         }
 
         public void AddBullet(List<Sprite> sprites)

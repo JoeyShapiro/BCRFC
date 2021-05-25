@@ -10,7 +10,7 @@ using System.Diagnostics;
 
 namespace BCRFC.Sprites
 {
-    class Weapon : Sprite
+    public class Weapon : Sprite
     {
         private int Damage;
         public List<Sprite> Attacked; // is this best way to attack EACH enemy ONLY once

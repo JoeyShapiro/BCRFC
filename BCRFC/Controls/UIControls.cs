@@ -4,6 +4,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using MonoGame.UI.Forms;
 using BCRFC.States;
+using BCRFC.Sprites;
 
 namespace BCRFC.Controls
 {
@@ -12,6 +13,8 @@ namespace BCRFC.Controls
         Game1 _game;
         private static int screenWidth;
         private static int screenHeight;
+
+        private Form playerForm;
 
         public UIControls(Game1 game) : base(game)
         {
@@ -168,6 +171,30 @@ namespace BCRFC.Controls
             };
             btnBack.Clicked += BtnBack_Clicked;
             Controls.Add(btnBack);
+        }
+
+        public void ShowPlayerForm(Player player)
+        {
+            playerForm = new Form()
+            {
+                Title = "Pipboy",
+                IsMovable = true,
+                Location = new Vector2(100, 100),
+                Size = new Vector2(526, 526)
+            };
+            var lblTemp = new Label()
+            {
+                Text = player.TempInventory.ToString(),
+                Location = new Vector2 (110, 110)
+            };
+            playerForm.Controls.Add(lblTemp);
+            Controls.Add(playerForm);
+        }
+
+        public void HidePlayerForm()
+        {
+            Controls.RemoveAll(delegate (Control c) { return true; });
+            LoadGame();
         }
     }
 }

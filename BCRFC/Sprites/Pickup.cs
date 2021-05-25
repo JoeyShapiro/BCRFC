@@ -6,7 +6,7 @@ using System.Text;
 
 namespace BCRFC.Sprites
 {
-    class Pickup : Sprite
+    public class Pickup : Sprite
     {
         public String Name;
         public String Desc; // all data of item

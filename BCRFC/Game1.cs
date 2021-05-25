@@ -7,6 +7,7 @@ using BCRFC.Models;
 using System.Linq;
 using BCRFC.States;
 using BCRFC.Controls;
+using System.Diagnostics;
 
 namespace BCRFC
 {
@@ -23,6 +24,9 @@ namespace BCRFC
         public State _currentState;
         private State _nextState;
         private UIControls ui;
+
+        // inventory management should handle here
+        private bool IsShowingPlayer = false;
      
         public Game1()
         {
@@ -80,6 +84,20 @@ namespace BCRFC
         public void ChangeState(State state)
         {
             _nextState = state;
+        }
+
+        public void TogglePlayerForm(Player player)
+        {
+            if (IsShowingPlayer)
+            {
+                ui.HidePlayerForm();
+                IsShowingPlayer = false;
+            }
+            else
+            {
+                ui.ShowPlayerForm(player);
+                IsShowingPlayer = true;
+            }
         }
 
         protected override void Draw(GameTime gameTime)

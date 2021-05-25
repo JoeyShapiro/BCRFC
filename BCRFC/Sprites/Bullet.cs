@@ -9,7 +9,7 @@ using BCRFC.Models;
 
 namespace BCRFC.Sprites
 {
-    class Bullet : Sprite
+    public class Bullet : Sprite
     {
         private float timer;
         public Bullet(Texture2D texture) : base(texture)

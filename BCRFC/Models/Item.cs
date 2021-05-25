@@ -4,7 +4,7 @@ using System.Text;
 
 namespace BCRFC.Models
 {
-    class Item
+    public class Item
     {
         int Width;
         int Height;
