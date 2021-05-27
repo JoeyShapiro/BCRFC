@@ -6,8 +6,9 @@ namespace BCRFC.Models
 {
     public class Inventory // check if correct folder for this
     {
-        private int Width;
-        private int Height;
+        public int Width;
+        public int Height;
+        public string Name;
 
         // find best way either index or index array or array for allocation or id in item or here or index that changes or checking upon adding and either local id or setting here somehow
         private Item[,] Items;

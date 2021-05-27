@@ -23,11 +23,14 @@ namespace BCRFC.Sprites
         private Pickup picked;
         public List<Pickup> TempInventory = new List<Pickup>(); // temporary make class and either use in player or have Pickup deal with inserting Item not Pickup see it does cause issue
         private bool CanAct = true;// to clean and give one command at time
-        private List<Inventory> Inventories; // make private for eaiser use but use methods and give items to player also check naming
+        public List<Inventory> Inventories; // make private for eaiser use but use methods and give items to player also check naming
 
         public Player(Texture2D texture) : base(texture)
         {
             Position = new Vector2(30, 40);
+            Inventories = new List<Inventory>();
+            Inventory pockets = new Inventory() { Name = "Pockets", Width = 4, Height = 1};
+            Inventories.Add(pockets);
         }
 
         public override void Update(GameTime gameTime, List<Sprite> sprites)

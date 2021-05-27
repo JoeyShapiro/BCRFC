@@ -11,6 +11,8 @@ using Microsoft.Xna.Framework.Content;
 using BCRFC.Controls;
 using System.ComponentModel;
 using System.Threading.Tasks;
+using GeonBit.UI.Entities;
+using GeonBit.UI;
 
 namespace BCRFC.States
 {
@@ -26,6 +28,9 @@ namespace BCRFC.States
         float _remainingDelay = _delay;
         private KeyboardState oldState; // find cleaner way
         public Player player;
+        private bool IsShowingPlayer = false;
+        private Panel panelPipboy = new Panel(new Vector2(540, 480), PanelSkin.Default, Anchor.TopLeft);
+        private Panel panelGameUI = new Panel(new Vector2(256, 480), PanelSkin.Default, Anchor.TopRight);
 
         public GameState(Game1 game, ContentManager content) : base(game, content)
         {
@@ -57,6 +62,8 @@ namespace BCRFC.States
                     Name = "Not PH"
                 }
             };
+            panelGameUI.Padding = Vector2.Zero;
+            UserInterface.Active.AddEntity(panelGameUI);
         }
 
         public override void Update(GameTime gameTime)
@@ -65,10 +72,13 @@ namespace BCRFC.States
             KeyboardState newState = Keyboard.GetState();
 
             if (Keyboard.GetState().IsKeyDown(Keys.Escape))
+            {
                 _game.ChangeState(new MenuState(_game, _content));
+                UserInterface.Active.Clear();
+            }
 
             if (oldState.IsKeyUp(Keys.I) && newState.IsKeyDown(Keys.I))
-                _game.TogglePlayerForm(player);
+                TogglePlayerSheet();
 
             foreach (var sprite in sprites.ToArray())
                 sprite.Update(gameTime, sprites);
@@ -99,6 +109,50 @@ namespace BCRFC.States
             foreach (var sprite in sprites)
                 sprite.Draw(spriteBatch);
             spriteBatch.End();
+        }
+
+        // check if best spot
+        public void TogglePlayerSheet() // yeah change to making it visible or not
+        {
+            if (IsShowingPlayer)
+            {
+                panelPipboy.ClearChildren();
+                UserInterface.Active.RemoveEntity(panelPipboy);
+                IsShowingPlayer = false;
+            }
+            else // create screen
+            {
+                UserInterface.Active.AddEntity(panelPipboy);
+
+                PanelTabs tabs = new PanelTabs();
+                panelPipboy.AddChild(tabs);
+                {
+                    TabData tab = tabs.AddTab("Stats");
+                    tab.panel.AddChild(new Paragraph("test"));
+                }
+                {
+                    TabData tab = tabs.AddTab("Inventory");
+                    //VerticalScrollbar scrollbar = new VerticalScrollbar(0, 10, Anchor.CenterRight);
+                    //tab.panel.AddChild(scrollbar);
+                    foreach (Inventory inv in player.Inventories)
+                    {
+                        tab.panel.AddChild(new Header(string.Format("{0} {1} x {2}", inv.Name, inv.Width, inv.Height)));
+                        for (int i = 0; i < inv.Width; i++)
+                        {
+                            for (int j = 0; j < inv.Height; j++)
+                            {
+                                tab.panel.AddChild(new Icon(IconType.Sword));
+                            }
+                        }
+                    }
+                    //scrollbar.OnValueChange = (Entity entity) =>
+                    //{
+
+                    //};
+                }
+
+                IsShowingPlayer = true;
+            }
         }
     }
 }

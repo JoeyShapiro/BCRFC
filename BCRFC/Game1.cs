@@ -8,6 +8,8 @@ using System.Linq;
 using BCRFC.States;
 using BCRFC.Controls;
 using System.Diagnostics;
+using GeonBit.UI;
+using GeonBit.UI.Entities;
 
 namespace BCRFC
 {
@@ -23,7 +25,7 @@ namespace BCRFC
 
         public State _currentState;
         private State _nextState;
-        private UIControls ui;
+        //private UIControls ui;
 
         // inventory management should handle here
         private bool IsShowingPlayer = false;
@@ -37,7 +39,7 @@ namespace BCRFC
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            IsMouseVisible = true;
+            //IsMouseVisible = true;
 
             this.Window.AllowUserResizing = false;
             this.Window.Title = "Become Corp.: Rogue Foraging Client";
@@ -46,8 +48,9 @@ namespace BCRFC
             ScreenHeight = graphics.PreferredBackBufferHeight;
             graphics.IsFullScreen = false;
             graphics.ApplyChanges();
-            ui = new UIControls(this);
-            this.Components.Add(ui);
+            //ui = new UIControls(this); // REMOVING THIS IS WHY MULTILEVEL IS NICE AND KEEPS CLEAN
+            //this.Components.Add(ui);
+            UserInterface.Initialize(Content, BuiltinThemes.hd);
 
             base.Initialize();
         }
@@ -58,7 +61,7 @@ namespace BCRFC
 
             _currentState = new MenuState(this, Content);
             _currentState.LoadContent();
-            ui.ChangeState(_currentState);
+            //ui.ChangeState(_currentState);
             _nextState = null;
         }
 
@@ -69,7 +72,7 @@ namespace BCRFC
                 {
                     _currentState = _nextState;
                     _currentState.LoadContent();
-                    ui.ChangeState(_currentState);
+                    //ui.ChangeState(_currentState);
 
                     _nextState = null;
                 }
@@ -78,6 +81,7 @@ namespace BCRFC
 
                 _currentState.PostUpdate(gameTime);
             }
+            UserInterface.Active.Update(gameTime);
             base.Update(gameTime);
         }
 
@@ -90,12 +94,12 @@ namespace BCRFC
         {
             if (IsShowingPlayer)
             {
-                ui.HidePlayerForm();
+                //ui.HidePlayerForm();
                 IsShowingPlayer = false;
             }
             else
             {
-                ui.ShowPlayerForm(player, 64, 64);
+                //ui.ShowPlayerForm(player, 64, 64);
                 IsShowingPlayer = true;
             }
         }
@@ -104,6 +108,7 @@ namespace BCRFC
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
             _currentState.Draw(gameTime, spriteBatch);
+            UserInterface.Active.Draw(spriteBatch);
             base.Draw(gameTime);
         }
     }
