@@ -31,6 +31,7 @@ namespace BCRFC.States
         private bool IsShowingPlayer = false;
         private Panel panelPipboy = new Panel(new Vector2(540, 480), PanelSkin.Default, Anchor.TopLeft);
         private Panel panelGameUI = new Panel(new Vector2(256, 480), PanelSkin.Default, Anchor.TopRight);
+        private Icon bufferItem = new Icon(IconType.None); // change to Item or something
 
         public GameState(Game1 game, ContentManager content) : base(game, content)
         {
@@ -134,29 +135,104 @@ namespace BCRFC.States
                     TabData tab = tabs.AddTab("Inventory");
                     //VerticalScrollbar scrollbar = new VerticalScrollbar(0, 10, Anchor.CenterRight);
                     //tab.panel.AddChild(scrollbar);
+                    // left side
+                    Panel panelLeft = new Panel(size: new Vector2(250, 380), skin: PanelSkin.None, anchor: Anchor.TopLeft);
+                    panelLeft.Padding = Vector2.Zero;
+                    tab.panel.AddChild(panelLeft);
+                    panelLeft.AddChild(new Header("Player", Anchor.TopCenter));
+                    // helm
+                    Icon equipHelm = new Icon(IconType.None, Anchor.AutoCenter, 1, true); // maybe this all works thinks the null works
+                    equipHelm.OnClick = (Entity entity) => // clean
+                    {
+                        Icon tempItem = new Icon(equipHelm.IconType);
+                        equipHelm.IconType = bufferItem.IconType;
+                        bufferItem.IconType = tempItem.IconType;
+                    };
+                    panelLeft.AddChild(equipHelm);
+                    // chest
+                    Icon equipChest = new Icon(IconType.None, Anchor.AutoCenter, 1, true); // maybe this all works thinks the null works
+                    equipChest.OnClick = (Entity entity) => // clean
+                    {
+                        Icon tempItem = new Icon(equipChest.IconType);
+                        equipChest.IconType = bufferItem.IconType;
+                        bufferItem.IconType = tempItem.IconType;
+                    };
+                    panelLeft.AddChild(equipChest);
+                    // primary
+                    Icon equipPrimary = new Icon(IconType.None, Anchor.CenterLeft, 1, true); // maybe this all works thinks the null works
+                    equipPrimary.OnClick = (Entity entity) => // clean
+                    {
+                        Icon tempItem = new Icon(equipPrimary.IconType);
+                        equipPrimary.IconType = bufferItem.IconType;
+                        bufferItem.IconType = tempItem.IconType;
+                    };
+                    panelLeft.AddChild(equipPrimary);
+                    // secondary
+                    Icon equipSecondary = new Icon(IconType.None, Anchor.CenterRight, 1, true); // maybe this all works thinks the null works
+                    equipSecondary.OnClick = (Entity entity) => // clean
+                    {
+                        Icon tempItem = new Icon(equipSecondary.IconType);
+                        equipSecondary.IconType = bufferItem.IconType;
+                        bufferItem.IconType = tempItem.IconType;
+                    };
+                    panelLeft.AddChild(equipSecondary);
+                    // legs
+                    Icon equipLegs = new Icon(IconType.None, Anchor.AutoCenter, 1, true); // maybe this all works thinks the null works
+                    equipLegs.OnClick = (Entity entity) => // clean
+                    {
+                        Icon tempItem = new Icon(equipLegs.IconType);
+                        equipLegs.IconType = bufferItem.IconType;
+                        bufferItem.IconType = tempItem.IconType;
+                    };
+                    panelLeft.AddChild(equipLegs);
+                    // back
+                    Icon equipBack = new Icon(IconType.None, Anchor.Auto, 1, true); // maybe this all works thinks the null works
+                    equipBack.OnClick = (Entity entity) => // clean
+                    {
+                        Icon tempItem = new Icon(equipBack.IconType);
+                        equipBack.IconType = bufferItem.IconType;
+                        bufferItem.IconType = tempItem.IconType;
+                    };
+                    panelLeft.AddChild(equipBack);
+                    // Ring
+                    Icon equipRing = new Icon(IconType.None, Anchor.AutoInline, 1, true); // maybe this all works thinks the null works
+                    equipRing.OnClick = (Entity entity) => // clean
+                    {
+                        Icon tempItem = new Icon(equipRing.IconType);
+                        equipRing.IconType = bufferItem.IconType;
+                        bufferItem.IconType = tempItem.IconType;
+                    };
+                    panelLeft.AddChild(equipRing);
+                    // ...
+                    // right side
+                    Panel panelRight = new Panel(size: new Vector2(250, 380), skin: PanelSkin.None, anchor: Anchor.TopRight);
+                    panelRight.Padding = Vector2.Zero;
+                    tab.panel.AddChild(panelRight);
                     foreach (Inventory inv in player.Inventories)
                     {
-                        // left side
-                        Panel panelLeft = new Panel(size: new Vector2(250, 380), skin: PanelSkin.None, anchor: Anchor.TopLeft);
-                        panelLeft.Padding = Vector2.Zero;
-                        tab.panel.AddChild(panelLeft);
-                        panelLeft.AddChild(new Header("Player", Anchor.TopCenter));
-                        ColoredRectangle equipHelm = new ColoredRectangle(Color.Gray, Color.BurlyWood, 5, new Vector2(64, 64), Anchor.AutoCenter);
-                        panelLeft.AddChild(equipHelm);
-                        // right side
-                        Panel panelRight = new Panel(size: new Vector2(250, 380), skin: PanelSkin.None, anchor: Anchor.TopRight);
-                        panelRight.Padding = Vector2.Zero;
-                        tab.panel.AddChild(panelRight);
                         panelRight.AddChild(new Header(string.Format("{0} {1} x {2}", inv.Name, inv.Width, inv.Height), Anchor.TopCenter));
                         Panel panelInv = new Panel(size: new Vector2(inv.Width * 52, inv.Height * 52), skin: PanelSkin.Simple, anchor: Anchor.AutoCenter);
                         panelInv.Padding = Vector2.Zero;
                         panelRight.AddChild(panelInv);
-                        for (int i = 0; i < inv.Width; i++)
+                        bool tempChange = false;
+                        for (int i = 0; i < inv.Width; i++) // i think i and j are mixed
                         {
                             for (int j = 0; j < inv.Height; j++)
                             {
-                                Icon item = new Icon(IconType.Sword, Anchor.AutoInline);
+                                Icon item; // just testing :P
+                                if (tempChange)
+                                    item = new Icon(IconType.Sword, Anchor.AutoInline, 1); // setting true after makes border
+                                else
+                                    item = new Icon(IconType.Apple, Anchor.AutoInline, 1);
+                                tempChange = !tempChange;
                                 item.Padding = Vector2.Zero;
+                                item.ToolTipText = "test";
+                                item.OnClick = (Entity entity) => // check if holding item and place in buffer item
+                                {
+                                    Icon tempItem = new Icon(item.IconType);
+                                    item.IconType = bufferItem.IconType;
+                                    bufferItem.IconType = tempItem.IconType;
+                                };
                                 panelInv.AddChild(item);
                             }
                         }
