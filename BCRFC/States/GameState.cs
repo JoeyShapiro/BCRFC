@@ -136,12 +136,28 @@ namespace BCRFC.States
                     //tab.panel.AddChild(scrollbar);
                     foreach (Inventory inv in player.Inventories)
                     {
-                        tab.panel.AddChild(new Header(string.Format("{0} {1} x {2}", inv.Name, inv.Width, inv.Height)));
+                        // left side
+                        Panel panelLeft = new Panel(size: new Vector2(250, 380), skin: PanelSkin.None, anchor: Anchor.TopLeft);
+                        panelLeft.Padding = Vector2.Zero;
+                        tab.panel.AddChild(panelLeft);
+                        panelLeft.AddChild(new Header("Player", Anchor.TopCenter));
+                        ColoredRectangle equipHelm = new ColoredRectangle(Color.Gray, Color.BurlyWood, 5, new Vector2(64, 64), Anchor.AutoCenter);
+                        panelLeft.AddChild(equipHelm);
+                        // right side
+                        Panel panelRight = new Panel(size: new Vector2(250, 380), skin: PanelSkin.None, anchor: Anchor.TopRight);
+                        panelRight.Padding = Vector2.Zero;
+                        tab.panel.AddChild(panelRight);
+                        panelRight.AddChild(new Header(string.Format("{0} {1} x {2}", inv.Name, inv.Width, inv.Height), Anchor.TopCenter));
+                        Panel panelInv = new Panel(size: new Vector2(inv.Width * 52, inv.Height * 52), skin: PanelSkin.Simple, anchor: Anchor.AutoCenter);
+                        panelInv.Padding = Vector2.Zero;
+                        panelRight.AddChild(panelInv);
                         for (int i = 0; i < inv.Width; i++)
                         {
                             for (int j = 0; j < inv.Height; j++)
                             {
-                                tab.panel.AddChild(new Icon(IconType.Sword));
+                                Icon item = new Icon(IconType.Sword, Anchor.AutoInline);
+                                item.Padding = Vector2.Zero;
+                                panelInv.AddChild(item);
                             }
                         }
                     }
