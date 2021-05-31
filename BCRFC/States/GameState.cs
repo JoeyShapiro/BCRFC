@@ -236,6 +236,14 @@ namespace BCRFC.States
                                     Image tempItemShown = itemShown;
                                     itemShown = bufferItem;
                                     bufferItem = tempItemShown;
+                                    int x = entity.Parent._children.IndexOf(entity) % inv.Width;
+                                    int y = entity.Parent._children.IndexOf(entity) % inv.Height;
+                                    Debug.WriteLine(x + " " + y); // how does this work its like magic also check on bigger invs cuase this math is wierd
+                                    Item tempItem = inv.GetItem(x, y); // deal with inv swap as well
+                                    Item buffered = inv.GetItem(x, y); // move outside i think
+                                    item = buffered;
+                                    buffered = tempItem;
+                                    Debug.WriteLine(buffered);
                                 };
                                 panelInv.AddChild(itemShown);
                             }
