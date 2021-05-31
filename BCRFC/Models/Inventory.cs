@@ -20,6 +20,14 @@ namespace BCRFC.Models
             Items = new Item[Width, Height];
         }
 
+        public Inventory(string name, int width, int height)
+        {
+            Name = name;
+            Width = width;
+            Height = height;
+            Items = new Item[Width, Height];
+        }
+
         public void AddItem(Item item) // maybe keep or use other one
         {
 

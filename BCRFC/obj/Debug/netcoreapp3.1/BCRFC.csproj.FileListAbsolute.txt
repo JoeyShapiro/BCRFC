@@ -1214,3 +1214,7 @@ C:\Users\joeya\source\repos\BCRFC\BCRFC\bin\Debug\netcoreapp3.1\Content\GeonBit.
 C:\Users\joeya\source\repos\BCRFC\BCRFC\bin\Debug\netcoreapp3.1\Content\GeonBit.UI\themes\lowres\fonts\Bold.xnb
 C:\Users\joeya\source\repos\BCRFC\BCRFC\bin\Debug\netcoreapp3.1\Content\GeonBit.UI\themes\lowres\fonts\Italic.xnb
 C:\Users\joeya\source\repos\BCRFC\BCRFC\bin\Debug\netcoreapp3.1\Content\GeonBit.UI\themes\lowres\fonts\Regular.xnb
+C:\Users\joeya\source\repos\BCRFC\BCRFC\bin\Debug\netcoreapp3.1\Content\Sprites\Items\Air.xnb
+C:\Users\joeya\source\repos\BCRFC\BCRFC\bin\Debug\netcoreapp3.1\Content\Sprites\Items\Axe.xnb
+C:\Users\joeya\source\repos\BCRFC\BCRFC\bin\Debug\netcoreapp3.1\Content\Sprites\Items\Hatchet.xnb
+C:\Users\joeya\source\repos\BCRFC\BCRFC\bin\Debug\netcoreapp3.1\Content\Sprites\Items\Sword.xnb

@@ -9,15 +9,16 @@ namespace BCRFC.Models
     {
         int Width;
         int Height;
-        int Name;
+        public string Name;
         // maybe remove these
         int GID; // gloabl id
         int LID; // local id
         // maybe grid of 1s to determine size and shape of space rather than 2D
         // image here
-        Image image;
+        public Image image;
         string Type;
         // find out how to deal with syblings
+        public string Description;
 
         public Item()
         {
