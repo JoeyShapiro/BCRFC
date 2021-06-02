@@ -235,7 +235,7 @@ namespace BCRFC.States
                                 {
                                     Image tempItemShown = itemShown;
                                     itemShown = bufferItem;
-                                    bufferItem = tempItemShown;
+                                    bufferItem = tempItemShown; // needs to be a shallow clone i think
                                     int x = entity.Parent._children.IndexOf(entity) % inv.Width;
                                     int y = entity.Parent._children.IndexOf(entity) % inv.Height;
                                     Debug.WriteLine(x + " " + y); // how does this work its like magic also check on bigger invs cuase this math is wierd
@@ -244,6 +244,34 @@ namespace BCRFC.States
                                     item = buffered;
                                     buffered = tempItem;
                                     Debug.WriteLine(buffered);
+                                    // follow mouse needs work
+                                    bufferItem.RemoveFromParent();
+                                    UserInterface.Active.AddEntity(bufferItem);
+                                    bufferItem.Anchor = Anchor.TopLeft;
+                                    bufferItem.BeforeDraw = (Entity entity) =>
+                                    {
+                                        entity.Offset = new Vector2(Mouse.GetState().X, Mouse.GetState().Y);
+                                    };
+                                };
+                                itemShown.OnRightClick = (Entity entity) =>
+                                {
+                                    entity.ClearChildren();
+                                    entity.Parent.Children.ToList().ForEach(delegate(Entity entity1) { entity1.ClearChildren(); }); // this works im magic
+                                    Panel panelOptions = new Panel(size: new Vector2(156, 156), skin: PanelSkin.Golden, anchor: Anchor.Auto, offset: new Vector2(52, 52));
+                                    // use button change layout
+                                    Button use = new Button("use", ButtonSkin.Alternative, Anchor.TopCenter, new Vector2(128, 32));
+                                    use.OnClick = (Entity entity) => { };
+                                    // mod
+                                    Button mod = new Button("mod", ButtonSkin.Alternative, Anchor.AutoCenter, new Vector2(128, 32));
+                                    mod.OnClick = (Entity entity) => { };
+                                    // discard
+                                    Button discard = new Button("discard", ButtonSkin.Alternative, Anchor.AutoCenter, new Vector2(128, 32));
+                                    discard.OnClick = (Entity entity) => { };
+                                    panelOptions.AddChild(use).Padding = Vector2.Zero;
+                                    panelOptions.AddChild(mod).Padding = Vector2.Zero;
+                                    panelOptions.AddChild(discard).Padding = Vector2.Zero;
+                                    itemShown.AddChild(panelOptions);
+                                    entity.Parent.OnClick = (Entity entity) => { entity.Children.ToList().ForEach(delegate (Entity entity1) { entity1.ClearChildren(); }); }; // needs one more parent but good enough
                                 };
                                 panelInv.AddChild(itemShown);
                             }
