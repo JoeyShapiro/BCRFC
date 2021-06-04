@@ -233,7 +233,7 @@ namespace BCRFC.States
                                 itemShown.Padding = Vector2.Zero;
                                 itemShown.OnClick = (Entity entity) => // check if holding item and place in buffer item
                                 {
-                                    Image tempItemShown = itemShown;
+                                    Image tempItemShown = itemShown; // maybe be kbuffer
                                     itemShown = bufferItem;
                                     bufferItem = tempItemShown; // needs to be a shallow clone i think
                                     int x = entity.Parent._children.IndexOf(entity) % inv.Width;
@@ -241,16 +241,17 @@ namespace BCRFC.States
                                     Debug.WriteLine(x + " " + y); // how does this work its like magic also check on bigger invs cuase this math is wierd
                                     Item tempItem = inv.GetItem(x, y); // deal with inv swap as well
                                     Item buffered = inv.GetItem(x, y); // move outside i think
-                                    item = buffered;
+                                    item = buffered; // needs to set the actual inv section
                                     buffered = tempItem;
                                     Debug.WriteLine(buffered);
+                                    //Debug.WriteLine(inv.Name + inv.GetItem(0, 0).Name);
                                     // follow mouse needs work
                                     bufferItem.RemoveFromParent();
                                     UserInterface.Active.AddEntity(bufferItem);
                                     bufferItem.Anchor = Anchor.TopLeft;
-                                    bufferItem.BeforeDraw = (Entity entity) =>
+                                    bufferItem.BeforeDraw = (Entity entity1) =>
                                     {
-                                        entity.Offset = new Vector2(Mouse.GetState().X, Mouse.GetState().Y);
+                                        entity1.Offset = new Vector2(Mouse.GetState().X + 8, Mouse.GetState().Y + 8);
                                     };
                                 };
                                 itemShown.OnRightClick = (Entity entity) =>

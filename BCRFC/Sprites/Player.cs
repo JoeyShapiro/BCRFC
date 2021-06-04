@@ -32,6 +32,7 @@ namespace BCRFC.Sprites
             Inventories = new List<Inventory>();
             Inventory pockets = new Inventory("Pockets", 4, 1);
             Inventories.Add(pockets);
+            StarterKit();
         }
 
         public override void Update(GameTime gameTime, List<Sprite> sprites)
@@ -173,6 +174,15 @@ namespace BCRFC.Sprites
         {
             int Range = 72;
             return sprite.Position.X < this.Position.X + Range && sprite.Position.X > this.Position.X - Range && sprite.Position.Y < this.Position.Y + Range && sprite.Position.Y > this.Position.Y - Range; // check for better with Pos
+        }
+
+        public void StarterKit() // maybe keep here
+        {
+            Inventory inv = Inventories.ElementAt(0);
+            Item item = new Item() { Name = "Hatchet", Description = "The Starter Hatchet" }; // modify
+            inv.TryAddItem(item, 0, 0);
+            item = new Item() { Name = "Sword", Description = "The Starter Sword" };
+            inv.TryAddItem(item, 1, 0);
         }
     }
 }
