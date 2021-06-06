@@ -270,27 +270,31 @@ namespace BCRFC.States
                                 };
                                 itemShown.OnRightClick = (Entity entity) =>
                                 {
-                                    entity.ClearChildren();
-                                    entity.Parent.Children.ToList().ForEach(delegate(Entity entity1) { entity1.ClearChildren(); }); // this works im magic
-                                    Panel panelOptions = new Panel(size: new Vector2(156, 156), skin: PanelSkin.Golden, anchor: Anchor.Auto, offset: new Vector2(52, 52));
-                                    // use button change layout
-                                    Button use = new Button("use", ButtonSkin.Alternative, Anchor.TopCenter, new Vector2(128, 32));
-                                    use.OnClick = (Entity entity) => { };
-                                    // mod
-                                    Button mod = new Button("mod", ButtonSkin.Alternative, Anchor.AutoCenter, new Vector2(128, 32));
-                                    mod.OnClick = (Entity entity) => { };
-                                    // discard
-                                    Button discard = new Button("discard", ButtonSkin.Alternative, Anchor.AutoCenter, new Vector2(128, 32));
-                                    discard.OnClick = (Entity entity) => { };
-                                    // appearance
-                                    Button appear = new Button("appearance", ButtonSkin.Alternative, Anchor.AutoCenter, new Vector2(128, 32));
-                                    appear.OnClick = (Entity entity) => { };
-                                    panelOptions.AddChild(use).Padding = Vector2.Zero;
-                                    panelOptions.AddChild(mod).Padding = Vector2.Zero;
-                                    panelOptions.AddChild(discard).Padding = Vector2.Zero;
-                                    panelOptions.AddChild(appear).Padding = Vector2.Zero;
-                                    itemShown.AddChild(panelOptions);
-                                    entity.Parent.OnClick = (Entity entity) => { entity.Children.ToList().ForEach(delegate (Entity entity1) { entity1.ClearChildren(); }); }; // needs one more parent but good enough
+                                    if (itemShown.TextureName != "Sprites/Items/Air")
+                                    {
+                                        entity.ClearChildren();
+                                        entity.Parent.Children.ToList().ForEach(delegate(Entity entity1) { entity1.ClearChildren(); }); // this works im magic
+                                        Panel panelOptions = new Panel(size: new Vector2(156, 192), skin: PanelSkin.Golden, anchor: Anchor.Auto, offset: new Vector2(52, 52));
+                                        // use button change layout
+                                        Button use = new Button("use", ButtonSkin.Alternative, Anchor.TopCenter, new Vector2(128, 32));
+                                        use.OnClick = (Entity entity) => { };
+                                        // mod
+                                        Button mod = new Button("mod", ButtonSkin.Alternative, Anchor.AutoCenter, new Vector2(128, 32));
+                                        mod.OnClick = (Entity entity) => { };
+                                        // discard
+                                        Button discard = new Button("discard", ButtonSkin.Alternative, Anchor.AutoCenter, new Vector2(128, 32));
+                                        discard.OnClick = (Entity entity) => { };
+                                        // appearance
+                                        Button appear = new Button("appear", ButtonSkin.Alternative, Anchor.AutoCenter, new Vector2(128, 32));
+                                        appear.OnClick = (Entity entity) => { };
+                                        panelOptions.AddChild(use).Padding = Vector2.Zero;
+                                        panelOptions.AddChild(mod).Padding = Vector2.Zero;
+                                        panelOptions.AddChild(discard).Padding = Vector2.Zero;
+                                        panelOptions.AddChild(appear).Padding = Vector2.Zero;
+                                        itemShown.AddChild(panelOptions);
+                                        itemShown.PriorityBonus = -1; // find way
+                                        entity.Parent.OnClick = (Entity entity) => { entity.Children.ToList().ForEach(delegate (Entity entity1) { entity1.ClearChildren(); }); }; // needs one more parent but good enough
+                                    }
                                 };
                                 panelInv.AddChild(itemShown);
                             }
