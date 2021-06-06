@@ -33,6 +33,8 @@ namespace BCRFC.States
         private Panel panelPipboy = new Panel(new Vector2(540, 480), PanelSkin.Default, Anchor.TopLeft);
         private Panel panelGameUI = new Panel(new Vector2(256, 480), PanelSkin.Default, Anchor.TopRight);
         private Image bufferItem; // change to Item or something
+        private Item tempItem;
+        private Item buffered;
 
         public GameState(Game1 game, ContentManager content) : base(game, content)
         {
@@ -233,26 +235,38 @@ namespace BCRFC.States
                                 itemShown.Padding = Vector2.Zero;
                                 itemShown.OnClick = (Entity entity) => // check if holding item and place in buffer item
                                 {
-                                    Image tempItemShown = itemShown; // maybe be kbuffer
-                                    itemShown = bufferItem;
-                                    bufferItem = tempItemShown; // needs to be a shallow clone i think
-                                    int x = entity.Parent._children.IndexOf(entity) % inv.Width;
-                                    int y = entity.Parent._children.IndexOf(entity) % inv.Height;
-                                    Debug.WriteLine(x + " " + y); // how does this work its like magic also check on bigger invs cuase this math is wierd
-                                    Item tempItem = inv.GetItem(x, y); // deal with inv swap as well
-                                    Item buffered = inv.GetItem(x, y); // move outside i think
-                                    item = buffered; // needs to set the actual inv section
-                                    buffered = tempItem;
-                                    Debug.WriteLine(buffered);
-                                    //Debug.WriteLine(inv.Name + inv.GetItem(0, 0).Name);
-                                    // follow mouse needs work
-                                    bufferItem.RemoveFromParent();
-                                    UserInterface.Active.AddEntity(bufferItem);
-                                    bufferItem.Anchor = Anchor.TopLeft;
-                                    bufferItem.BeforeDraw = (Entity entity1) =>
+                                    if (itemShown.TextureName != "Sprites/Items/Air" || bufferItem.TextureName != "Sprites/Items/Air") // find better way
                                     {
-                                        entity1.Offset = new Vector2(Mouse.GetState().X + 8, Mouse.GetState().Y + 8);
-                                    };
+                                        Image tempItemShown = new Image(_content.Load<Texture2D>("Sprites/Items/Air"), new Vector2(64, 64), anchor: Anchor.AutoInline); // maybe be kbuffer myabe redundant
+                                        tempItemShown.Texture = itemShown.Texture;
+                                        tempItemShown.ToolTipText = itemShown.ToolTipText;
+                                        itemShown.Texture = bufferItem.Texture;
+                                        itemShown.ToolTipText = bufferItem.ToolTipText;
+                                        bufferItem.Texture = tempItemShown.Texture; // needs to be a shallow clone i think
+                                        bufferItem.ToolTipText = tempItemShown.ToolTipText;
+                                        int x = entity.Parent._children.IndexOf(entity) % inv.Width;
+                                        int y = entity.Parent._children.IndexOf(entity) % inv.Height;
+                                        Debug.WriteLine(x + " " + y); // how does this work its like magic also check on bigger invs cuase this math is wierd
+                                        //tempItem = inv.GetItem(x, y); // deal with inv swap as well
+                                        //item = inv.GetItem(x, y);
+                                        //buffered = inv.GetItem(x, y); // move outside i think
+                                        tempItem = buffered;
+                                        Debug.WriteLine("Held:" + tempItem + " -> " + x + ", " + y + " Inventory: " + buffered); // i think this is wrong
+                                        buffered = inv.SwapItems(tempItem, x, y);
+                                        Debug.WriteLine("Inventory:" + tempItem + " -> " + x + ", " + y + " Held: " + buffered);
+                                        //Debug.WriteLine(inv.Name + inv.GetItem(0, 0).Name);
+                                        // follow mouse needs work
+                                        bufferItem.RemoveFromParent();
+                                        if (bufferItem.TextureName != "Sprites/Items/Air") // if buffer item is something
+                                        {
+                                            UserInterface.Active.AddEntity(bufferItem);
+                                            bufferItem.Anchor = Anchor.TopLeft;
+                                            bufferItem.BeforeDraw = (Entity entity1) =>
+                                            {
+                                                entity1.Offset = new Vector2(Mouse.GetState().X + 8, Mouse.GetState().Y + 8);
+                                            };
+                                        }
+                                    }
                                 };
                                 itemShown.OnRightClick = (Entity entity) =>
                                 {

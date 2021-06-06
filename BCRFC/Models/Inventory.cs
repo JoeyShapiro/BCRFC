@@ -53,6 +53,14 @@ namespace BCRFC.Models
             return Items[x, y];
         }
 
+        public Item SwapItems(Item item, int x, int y)
+        {
+            // add checks for bigger items later
+            Item bufferItem = Items[x, y];
+            Items[x, y] = item;
+            return bufferItem;
+        }
+
         public void ShowItems() // maybe list then pass to player to ListInventory()
         {
 
