@@ -268,9 +268,13 @@ namespace BCRFC.States
                                     // discard
                                     Button discard = new Button("discard", ButtonSkin.Alternative, Anchor.AutoCenter, new Vector2(128, 32));
                                     discard.OnClick = (Entity entity) => { };
+                                    // appearance
+                                    Button appear = new Button("appearance", ButtonSkin.Alternative, Anchor.AutoCenter, new Vector2(128, 32));
+                                    appear.OnClick = (Entity entity) => { };
                                     panelOptions.AddChild(use).Padding = Vector2.Zero;
                                     panelOptions.AddChild(mod).Padding = Vector2.Zero;
                                     panelOptions.AddChild(discard).Padding = Vector2.Zero;
+                                    panelOptions.AddChild(appear).Padding = Vector2.Zero;
                                     itemShown.AddChild(panelOptions);
                                     entity.Parent.OnClick = (Entity entity) => { entity.Children.ToList().ForEach(delegate (Entity entity1) { entity1.ClearChildren(); }); }; // needs one more parent but good enough
                                 };
