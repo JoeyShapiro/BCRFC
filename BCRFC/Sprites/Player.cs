@@ -184,5 +184,13 @@ namespace BCRFC.Sprites
             item = new Item() { Name = "Sword", Description = "The Starter Sword" };
             inv.TryAddItem(item, 1, 0);
         }
+
+        // why not
+        public Item SwapEquipped(Item item, int i)
+        {
+            Item bufferItem = equipped[i];
+            equipped[i] = item;
+            return bufferItem;
+        }
     }
 }
