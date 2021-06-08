@@ -158,7 +158,7 @@ namespace BCRFC.States
                     }
                     equipHelm.OnClick = (Entity entity) => // clean
                     {
-                        if (equipHelm.TextureName != "Sprites/Items/Air" || bufferItem.TextureName != "Sprites/Items/Air") // find better way
+                        if (equipHelm.TextureName != "Sprites/Items/Air" || (bufferItem.TextureName != "Sprites/Items/Air" && buffered.Type == "Helmet")) // find better way
                         {
                             Image tempItemShown = new Image(_content.Load<Texture2D>("Sprites/Items/Air"), new Vector2(64, 64), anchor: Anchor.AutoInline); // maybe be kbuffer myabe redundant
                             tempItemShown.Texture = equipHelm.Texture;
@@ -183,12 +183,41 @@ namespace BCRFC.States
                     };
                     panelLeft.AddChild(equipHelm);
                     // chest
-                    Image equipChest = new Image(_content.Load<Texture2D>("Sprites/Items/Air"), new Vector2(64, 64), anchor: Anchor.AutoCenter); // maybe this all works thinks the null works
+                    Item itemChest = player.equipped[1];
+                    Image equipChest; // maybe this all works thinks the null works
+                    if (itemChest != null)
+                    {
+                        equipChest = new Image(_content.Load<Texture2D>("Sprites/Items/" + itemChest.Name), new Vector2(64, 64), anchor: Anchor.AutoCenter);
+                        equipChest.ToolTipText = string.Format("{0}:\n{1}", itemChest.Name, itemChest.Description);
+                    }
+                    else
+                    {
+                        equipChest = new Image(_content.Load<Texture2D>("Sprites/Items/Air"), new Vector2(64, 64), anchor: Anchor.AutoCenter);
+                    }
                     equipChest.OnClick = (Entity entity) => // clean
                     {
-                        Image tempItem = equipChest;
-                        equipChest = bufferItem;
-                        bufferItem = tempItem;
+                        if (equipChest.TextureName != "Sprites/Items/Air" || (bufferItem.TextureName != "Sprites/Items/Air" && buffered.Type == "Chest")) // find better way
+                        {
+                            Image tempItemShown = new Image(_content.Load<Texture2D>("Sprites/Items/Air"), new Vector2(64, 64), anchor: Anchor.AutoInline); // maybe be kbuffer myabe redundant
+                            tempItemShown.Texture = equipChest.Texture;
+                            tempItemShown.ToolTipText = equipChest.ToolTipText;
+                            equipChest.Texture = bufferItem.Texture;
+                            equipChest.ToolTipText = bufferItem.ToolTipText;
+                            bufferItem.Texture = tempItemShown.Texture; // needs to be a shallow clone i think
+                            bufferItem.ToolTipText = tempItemShown.ToolTipText;
+                            tempItem = buffered;
+                            buffered = player.SwapEquipped(tempItem, 1);
+                            bufferItem.RemoveFromParent();
+                            if (bufferItem.TextureName != "Sprites/Items/Air") // if buffer item is something and check if helmet item
+                            {
+                                UserInterface.Active.AddEntity(bufferItem);
+                                bufferItem.Anchor = Anchor.TopLeft;
+                                bufferItem.BeforeDraw = (Entity entity1) =>
+                                {
+                                    entity1.Offset = new Vector2(Mouse.GetState().X + 8, Mouse.GetState().Y + 8);
+                                };
+                            }
+                        }
                     };
                     panelLeft.AddChild(equipChest);
                     // primary
@@ -219,12 +248,41 @@ namespace BCRFC.States
                     };
                     panelLeft.AddChild(equipLegs);
                     // back
-                    Image equipBack = new Image(_content.Load<Texture2D>("Sprites/Items/Air"), new Vector2(64, 64), anchor: Anchor.Auto); // maybe this all works thinks the null works
+                    Item itemBack = player.equipped[5];
+                    Image equipBack; // maybe this all works thinks the null works
+                    if (itemBack != null)
+                    {
+                        equipBack = new Image(_content.Load<Texture2D>("Sprites/Items/" + itemBack.Name), new Vector2(64, 64), anchor: Anchor.Auto);
+                        equipBack.ToolTipText = string.Format("{0}:\n{1}", itemBack.Name, itemBack.Description);
+                    }
+                    else
+                    {
+                        equipBack = new Image(_content.Load<Texture2D>("Sprites/Items/Air"), new Vector2(64, 64), anchor: Anchor.Auto);
+                    }
                     equipBack.OnClick = (Entity entity) => // clean
                     {
-                        Image tempItem = equipBack;
-                        equipBack = bufferItem;
-                        bufferItem = tempItem;
+                        if (equipBack.TextureName != "Sprites/Items/Air" || (bufferItem.TextureName != "Sprites/Items/Air" && buffered.Type == "Back")) // find better way
+                        {
+                            Image tempItemShown = new Image(_content.Load<Texture2D>("Sprites/Items/Air"), new Vector2(64, 64), anchor: Anchor.AutoInline); // maybe be kbuffer myabe redundant
+                            tempItemShown.Texture = equipBack.Texture;
+                            tempItemShown.ToolTipText = equipBack.ToolTipText;
+                            equipBack.Texture = bufferItem.Texture;
+                            equipBack.ToolTipText = bufferItem.ToolTipText;
+                            bufferItem.Texture = tempItemShown.Texture; // needs to be a shallow clone i think
+                            bufferItem.ToolTipText = tempItemShown.ToolTipText;
+                            tempItem = buffered;
+                            buffered = player.SwapEquipped(tempItem, 5);
+                            bufferItem.RemoveFromParent();
+                            if (bufferItem.TextureName != "Sprites/Items/Air") // if buffer item is something and check if helmet item
+                            {
+                                UserInterface.Active.AddEntity(bufferItem);
+                                bufferItem.Anchor = Anchor.TopLeft;
+                                bufferItem.BeforeDraw = (Entity entity1) =>
+                                {
+                                    entity1.Offset = new Vector2(Mouse.GetState().X + 8, Mouse.GetState().Y + 8);
+                                };
+                            }
+                        }
                     };
                     panelLeft.AddChild(equipBack);
                     // Ring

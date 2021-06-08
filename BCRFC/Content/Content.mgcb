@@ -4848,6 +4848,18 @@
 /processorParam:TextureFormat=Color
 /build:Sprites/Items/Axe.png
 
+#begin Sprites/Items/Chestplate.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/Items/Chestplate.png
+
 #begin Sprites/Items/Hatchet.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -4859,6 +4871,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Sprites/Items/Hatchet.png
+
+#begin Sprites/Items/Knapsack.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/Items/Knapsack.png
 
 #begin Sprites/Items/Sword.png
 /importer:TextureImporter

@@ -179,10 +179,14 @@ namespace BCRFC.Sprites
         public void StarterKit() // maybe keep here
         {
             Inventory inv = Inventories.ElementAt(0);
-            Item item = new Item() { Name = "Hatchet", Description = "The Starter Hatchet" }; // modify
+            Item item = new Item() { Name = "Hatchet", Description = "The Starter Hatchet", Type = "Weapon" }; // modify
             inv.TryAddItem(item, 0, 0);
-            item = new Item() { Name = "Sword", Description = "The Starter Sword" };
+            item = new Item() { Name = "Sword", Description = "The Starter Sword", Type = "Weapon" };
             inv.TryAddItem(item, 1, 0);
+            item = new Item() { Name = "Chestplate", Description = "The Starter chestplate", Type = "Chest" };
+            inv.TryAddItem(item, 2, 0);
+            item = new Item() { Name = "Knapsack", Description = "For storing stuff", Type = "Back" };
+            inv.TryAddItem(item, 3, 0);
         }
 
         // why not

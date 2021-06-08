@@ -1218,3 +1218,5 @@ C:\Users\joeya\source\repos\BCRFC\BCRFC\bin\Debug\netcoreapp3.1\Content\Sprites\
 C:\Users\joeya\source\repos\BCRFC\BCRFC\bin\Debug\netcoreapp3.1\Content\Sprites\Items\Axe.xnb
 C:\Users\joeya\source\repos\BCRFC\BCRFC\bin\Debug\netcoreapp3.1\Content\Sprites\Items\Hatchet.xnb
 C:\Users\joeya\source\repos\BCRFC\BCRFC\bin\Debug\netcoreapp3.1\Content\Sprites\Items\Sword.xnb
+C:\Users\joeya\source\repos\BCRFC\BCRFC\bin\Debug\netcoreapp3.1\Content\Sprites\Items\Chestplate.xnb
+C:\Users\joeya\source\repos\BCRFC\BCRFC\bin\Debug\netcoreapp3.1\Content\Sprites\Items\Knapsack.xnb

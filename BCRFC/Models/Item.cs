@@ -16,7 +16,7 @@ namespace BCRFC.Models
         // maybe grid of 1s to determine size and shape of space rather than 2D
         // image here
         public Image image;
-        string Type;
+        public string Type;
         // find out how to deal with syblings
         public string Description;
 

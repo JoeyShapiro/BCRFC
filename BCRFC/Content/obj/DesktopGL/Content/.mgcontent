@@ -596,11 +596,15 @@
     <File>C:/Users/joeya/source/repos/BCRFC/BCRFC/Content/Player.png</File>
     <File>C:/Users/joeya/source/repos/BCRFC/BCRFC/Content/Sprites/Items/Air.png</File>
     <File>C:/Users/joeya/source/repos/BCRFC/BCRFC/Content/Sprites/Items/Axe.png</File>
+    <File>C:/Users/joeya/source/repos/BCRFC/BCRFC/Content/Sprites/Items/Chestplate.png</File>
     <File>C:/Users/joeya/source/repos/BCRFC/BCRFC/Content/Sprites/Items/Hatchet.png</File>
+    <File>C:/Users/joeya/source/repos/BCRFC/BCRFC/Content/Sprites/Items/Knapsack.png</File>
     <File>C:/Users/joeya/source/repos/BCRFC/BCRFC/Content/Sprites/Items/Sword.png</File>
     <File>C:/Users/joeya/source/repos/BCRFC/BCRFC/Content/Weapon.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
